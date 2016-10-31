@@ -26,9 +26,18 @@ if [ "$(ls -A ${SONARQUBE_PLUGINS_DIR})" ]; then
     done
 fi
 
+
 SONAR_ARGUMENTS="-Dsonar.web.context=${SONARQUBE_WEB_CONTEXT} \
   -Dsonar.core.serverBaseURL=${SONARQUBE_SERVER_BASE} \
   -Dsonar.forceAuthentication=${SONARQUBE_FORCE_AUTHENTICATION}"
+
+
+if  [ "${SONAR_RDS_ENABLED}" = true ]; then
+    echo 'RDS enabled, adding SONARQUBE_JDBC_PASSWORD...'
+    SONAR_ARGUMENTS="${SONAR_ARGUMENTS} \
+        -Dsonar.jdbc.password=${SONARQUBE_JDBC_PASSWORD}"
+fi
+
 
 if [ "$ADOP_LDAP_ENABLED" = true ]
   then
