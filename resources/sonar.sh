@@ -35,7 +35,8 @@ SONAR_ARGUMENTS="-Dsonar.web.context=${SONARQUBE_WEB_CONTEXT} \
 if  [ "${SONAR_RDS_ENABLED}" = true ]; then
     echo 'RDS enabled, adding SONARQUBE_JDBC_PASSWORD...'
     SONAR_ARGUMENTS="${SONAR_ARGUMENTS} \
-        -Dsonar.jdbc.password=${SONARQUBE_JDBC_PASSWORD}"
+        -Dsonar.jdbc.password=${SONARQUBE_JDBC_PASSWORD} \
+        -DuseConfigs=maxPerformance"
 fi
 
 
